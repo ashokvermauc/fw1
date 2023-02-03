@@ -1,62 +1,61 @@
-component {
-    // copy this to your application root to use as your Application.cfc
-    // or incorporate the logic below into your existing Application.cfc
+component extends="framework.one"{
 
-    // you can provide a specific application name if you want:
-    this.name = hash( getBaseTemplatePath() );
+    this.name = "app";
 
-    // any other application settings:
-    this.sessionManagement = true;
+    variables.framework = {
 
-    // set up per-application mappings as needed:
-    this.mappings[ '/framework' ] = getDirectoryFromPath( getBaseTemplatePath() ) & 'framework';
-    // this.mappings[ '/app' ] expandPath( '../path/to/app' );
+    reloadApplicationOnEveryRequest = true,    
+    reload = '000',
+    password = '$$$',
+    generateSES = false
+    // action = 'action',
+    // // base has no default value -- see below
+    // // cfcbase has no default value -- see below
+    // usingSubsystems = false,
+    // defaultSubsystem = 'home',
+    // defaultSection = 'main',
+    // defaultItem = 'default',
+    // subsystemDelimiter = ':',
+    // siteWideLayoutSubsystem = 'common',
+    // subsystems = { },
+    // home = 'main.default', // defaultSection & '.' & defaultItem
+    // // or: defaultSubsystem & subsystemDelimiter & defaultSection & '.' & defaultItem
+    // error = 'main.error', // defaultSection & '.error'
+    // // or: defaultSubsystem & subsystemDelimiter & defaultSection & '.error'
+    // // missingview has no default value -- see below
+    // reload = 'reload',
+    // password = 'true',
+    // reloadApplicationOnEveryRequest = false,
+    // preserveKeyURLKey = 'fw1pk',
+    // maxNumContextsPreserved = 10,
+    // baseURL = 'useCgiScriptName',
+    // generateSES = false,
+    // SESOmitIndex = false,
+    // unhandledExtensions = 'cfc,lc,lucee',
+    // unhandledPaths = '/flex2gateway',
+    // unhandledErrorCaught = false,
+    // applicationKey = 'framework.one',
+    // cacheFileExists = false,
+    // routes = [ ],
+    // perResourceError = true,
+    // // resourceRouteTemplates - see routes documentation
+    // routesCaseSensitive = true,
+    // noLowerCase = false,
+    // trace = false,
+    // controllersFolder = "controllers",
+    // layoutsFolder = "layouts",
+    // subsystemsFolder = "subsystems",
+    // viewsFolder = views",
+    // diOverrideAllowed = false,
+    // diEngine = "di1",
+    // diLocations = [ "model", "controllers" ],
+    // diConfig = { },
+    // diComponent = "framework.ioc",
+    // decodeRequestBody = false,
+    // preflightOptions = false,
+    // optionsAccessControl = { },
+    // environments = { }
+};
 
-    function _get_framework_one() {
-        if ( !structKeyExists( request, '_framework_one' ) ) {
-            
-            // create your FW/1 application:
-            request._framework_one = new framework.one( {
-                trace = true,
-                missingview = 'main.missingview',
-                base = getDirectoryFromPath( CGI.SCRIPT_NAME )
-                    .replaceFirst( getContextRoot(), '' ) & 'introduction'
-            } );
 
-            // you can specify FW/1 configuration as an argument:
-            // request._framework_one = new framework.one({
-            //     base : '/app',
-            //     trace : true
-            // });
-
-            // if you need to override extension points, use
-            // MyApplication.cfc for those and then do:
-            // request._framework_one = new MyApplication({
-            //     base : '/app',
-            //     trace : true
-            // });
-
-        }
-        return request._framework_one;
-    }
-
-    // delegation of lifecycle methods to FW/1:
-    function onApplicationStart() {
-        return _get_framework_one().onApplicationStart();
-    }
-    function onError( exception, event ) {
-        return _get_framework_one().onError( exception, event );
-    }
-    function onRequest( targetPath ) {
-        return _get_framework_one().onRequest( targetPath );
-    }
-    function onRequestEnd() {
-        return _get_framework_one().onRequestEnd();
-    }
-    function onRequestStart( targetPath ) {
-        return _get_framework_one().onRequestStart( targetPath );
-    }
-    function onSessionStart() {
-        return _get_framework_one().onSessionStart();
-    }
 }

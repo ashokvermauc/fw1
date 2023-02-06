@@ -7,7 +7,11 @@ component extends="framework.one"{
     reloadApplicationOnEveryRequest = true,    
     reload = '000',
     password = '$$$',
-    generateSES = false
+    generateSES = false,
+
+    this.ormenabled = true,
+    this.datasource = "localhost"
+
     // action = 'action',
     // // base has no default value -- see below
     // // cfcbase has no default value -- see below
